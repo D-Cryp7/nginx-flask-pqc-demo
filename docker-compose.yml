@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./certs:/certs:ro
+    depends_on:
+      - flask
+
+  flask:
+    build: ./flask
+    expose:
+      - "8000"
+    volumes:
+      - ./flask/keys:/app/keys:rw
+      
